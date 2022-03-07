@@ -5,7 +5,7 @@
 <template>
    <section id="results">
       <div>
-         <h5>Valor da gorjeta</h5>
+         <h5>Valor da Gorjeta</h5>
          <p>/ pessoa</p>
          <h2>$0,00</h2>
       </div>
@@ -64,11 +64,13 @@ section {
       color: #f4fafa;
       grid-area: h5;
       font-weight: 700;
+      font-size: 15px;
    }
 
    p {
       color: hsl(185, 41%, 84%);
       grid-area: p;
+      font-size: 14px;
    }
 
    h2 {

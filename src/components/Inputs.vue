@@ -9,6 +9,12 @@
          <img src="@/assets/imgs/icon-dollar.svg" alt="Dollar" />
          <input type="number" id="bill" placeholder="0" />
       </div>
+
+      <label for="bill">Número de Pessoas</label>
+      <div>
+         <img src="@/assets/imgs/icon-person.svg" alt="Dollar" />
+         <input type="number" id="bill" placeholder="0" />
+      </div>
    </section>
 </template>
 
@@ -31,6 +37,7 @@ div {
    display: flex;
    align-items: center;
    justify-content: space-between;
+   margin-bottom: 32px;
 
    input {
       border: none;
