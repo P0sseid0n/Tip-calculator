@@ -1,8 +1,29 @@
 import { defineStore } from 'pinia'
 
-export const useCounterStore = defineStore({
+export const useStore = defineStore({
 	id: 'calculator',
-	state: () => ({}),
-	getters: {},
-	actions: {},
+	state: () => ({
+		bill: '',
+		tip: '',
+		people: '',
+	}),
+	getters: {
+		tipAmount(state) {
+			if (state.bill && state.people && state.tip) {
+				return (Number(state.bill) * (Number(state.tip) / 100)) / Number(state.people)
+			} else return 0
+		},
+		total(state) {
+			if (state.bill && state.people && state.tip) {
+				return (Number(state.bill) * (1 + Number(state.tip) / 100)) / Number(state.people)
+			} else return 0
+		},
+	},
+	actions: {
+		reset() {
+			this.bill = ''
+			this.tip = ''
+			this.people = ''
+		},
+	},
 })

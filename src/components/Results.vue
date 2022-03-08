@@ -1,5 +1,6 @@
 <script setup lang="ts">
-
+import { useStore } from '@/stores'
+const store = useStore()
 </script>
 
 <template>
@@ -7,14 +8,14 @@
       <div>
          <h5>Valor da Gorjeta</h5>
          <p>/ pessoa</p>
-         <h2>$0,00</h2>
+         <h2>${{ Math.floor(store.tipAmount * 100) / 100 || '0,00' }}</h2>
       </div>
       <div>
          <h5>Total</h5>
          <p>/ pessoa</p>
-         <h2>$0,00</h2>
+         <h2>${{ store.total.toFixed(2) || '0,00' }}</h2>
       </div>
-      <button>Reset</button>
+      <button @click="store.reset">Reset</button>
    </section>
 </template>
 

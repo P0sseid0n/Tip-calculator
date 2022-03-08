@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { ref, type Ref, watch } from 'vue';
+import { ref, type Ref, watch } from 'vue'
+import { useStore } from '@/stores'
+
+const store = useStore()
 
 const billInputStatus: Ref<'focused' | 'error' | null> = ref(null)
 const peopleInputStatus: Ref<'focused' | 'error' | null> = ref(null)
@@ -7,13 +10,26 @@ const tip: Ref<number> = ref(0)
 const tipInput = ref('')
 const tipInputStatus: Ref<'focused' | null> = ref(null)
 
-watch(tip, (newValue) => {
+store.$subscribe((mutation, state) => {
+   if (state.tip == '') {
+      tip.value = 0
+      tipInput.value = ''
+   }
+})
+
+watch(tip, newValue => {
+   store.tip = String(newValue)
    if (newValue == Number(tipInput.value)) return
    tipInput.value = ''
 })
 
-watch(tipInput, (newValue) => {
-   if (newValue == '') return
+watch(tipInput, (newValue, oldValue) => {
+   store.tip = newValue
+
+   if (newValue == '') {
+      if (tip.value !== Number(oldValue)) store.tip = String(tip.value)
+      return
+   }
 
    tip.value = Number(newValue)
 })
@@ -32,6 +48,7 @@ watch(tipInput, (newValue) => {
             @focus="billInputStatus = 'focused'"
             @blur="billInputStatus = null"
             @error="billInputStatus = 'error'"
+            v-model="store.bill"
          />
       </div>
 
@@ -62,6 +79,7 @@ watch(tipInput, (newValue) => {
             placeholder="0"
             @focus="peopleInputStatus = 'focused'"
             @blur="peopleInputStatus = null"
+            v-model="store.people"
          />
       </div>
    </section>
