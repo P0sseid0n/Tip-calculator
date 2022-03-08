@@ -48,7 +48,7 @@ main {
 
    #inputs {
       // width: 40%;
-      flex: 4;
+      // flex: 4;
    }
 
    > section {

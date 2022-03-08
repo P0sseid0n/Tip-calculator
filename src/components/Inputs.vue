@@ -5,6 +5,7 @@ const billInputStatus: Ref<'focused' | 'error' | null> = ref(null)
 const peopleInputStatus: Ref<'focused' | 'error' | null> = ref(null)
 const tip: Ref<number> = ref(0)
 const tipInput = ref('')
+const tipInputStatus: Ref<'focused' | null> = ref(null)
 
 watch(tip, (newValue) => {
    if (newValue == Number(tipInput.value)) return
@@ -22,7 +23,7 @@ watch(tipInput, (newValue) => {
 <template>
    <section id="inputs">
       <label for="bill">Gastos</label>
-      <div :class="['type', billInputStatus == 'focused' ? 'isFocused' : '']">
+      <div :class="['type', { 'isFocused': billInputStatus == 'focused' }]">
          <img src="@/assets/imgs/icon-dollar.svg" alt="Dollar" />
          <input
             type="number"
@@ -41,13 +42,19 @@ watch(tipInput, (newValue) => {
          <button :class="{ 'selected': tip === 15 }" @click="tip = 15">15%</button>
          <button :class="{ 'selected': tip === 25 }" @click="tip = 25">25%</button>
          <button :class="{ 'selected': tip === 50 }" @click="tip = 50">50%</button>
-         <div class="type">
-            <input type="number" placeholder="Custom" v-model.trim="tipInput" />
+         <div :class="['type', { 'isFocused': tipInputStatus == 'focused' }]">
+            <input
+               type="number"
+               placeholder="Custom"
+               v-model.trim="tipInput"
+               @focus="tipInputStatus = 'focused'"
+               @blur="tipInputStatus = null"
+            />
          </div>
       </div>
 
       <label for="people">Número de Pessoas</label>
-      <div :class="['type', peopleInputStatus == 'focused' ? 'isFocused' : '']">
+      <div :class="['type', { 'isFocused': peopleInputStatus == 'focused' }]">
          <img src="@/assets/imgs/icon-person.svg" alt="Person" />
          <input
             type="number"
@@ -103,11 +110,11 @@ div.select {
       font-size: 20px;
       // font-weight: 700;
       // text-align: center;
-      // color: hsl(183, 100%, 15%);
+      color: hsl(183, 100%, 15%);
       // cursor: pointer;
 
       &::placeholder {
-         color: red;
+         color: hsl(186, 14%, 43%) !important;
       }
    }
 
@@ -144,15 +151,22 @@ div.type {
       border-color: hsl(172, 67%, 45%);
    }
 
+   img {
+      margin-left: 8px;
+   }
+
    input {
       border: none;
       outline: 0;
       background: transparent;
-      flex: 1;
+      width: 100%;
       text-align: right;
       font-size: 24px;
       color: #00494d;
       font-weight: 600;
+
+      padding-left: 4px;
+      padding-right: 4px;
 
       appearance: none;
 
