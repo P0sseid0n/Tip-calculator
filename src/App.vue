@@ -4,6 +4,10 @@ import Results from './components/Results.vue';
 </script>
 
 <template>
+   <h1>
+      Spli
+      <br />tter
+   </h1>
    <main>
       <Inputs />
       <Results />
@@ -23,12 +27,23 @@ import Results from './components/Results.vue';
    height: 100vh;
    width: 100%;
 
+   gap: 32px;
+
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
 
    background-color: #c5e4e7;
+
+   h1 {
+      text-transform: uppercase;
+      font-size: 24px;
+      letter-spacing: 6px;
+      font-weight: 700;
+      color: hsl(183, 100%, 15%);
+      line-height: 28px;
+   }
 }
 
 main {
@@ -58,11 +73,23 @@ main {
    }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 700px) {
+   #app {
+      height: initial;
+      gap: 0;
+
+      h1 {
+         margin-top: 40px;
+      }
+   }
+
    main {
       width: 100%;
       flex-direction: column;
-      height: auto;
+      height: inherit;
+      margin-top: 40px;
+      margin-bottom: 32px;
+      gap: 0;
    }
 }
 </style>
