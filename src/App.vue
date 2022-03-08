@@ -35,7 +35,7 @@ main {
    background-color: white;
 
    height: 400px;
-   width: 80%;
+   width: 90%;
    max-width: 900px;
 
    border-radius: 32px;
@@ -46,8 +46,23 @@ main {
    flex-direction: row;
    gap: 32px;
 
+   #inputs {
+      // width: 40%;
+      flex: 4;
+   }
+
    > section {
-      width: 50%;
+      // width: 100%;
+      flex: 5;
+      min-width: 260px;
+   }
+}
+
+@media screen and (max-width: 768px) {
+   main {
+      width: 100%;
+      flex-direction: column;
+      height: auto;
    }
 }
 </style>

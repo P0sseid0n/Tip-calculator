@@ -42,7 +42,7 @@ section {
       border: none;
       outline: 0;
 
-      transition: all 0.15s ease-in-out;
+      transition: all 0.3s ease-in-out;
 
       &:hover {
          background: hsl(172, 61%, 77%);
