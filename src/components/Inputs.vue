@@ -1,9 +1,21 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue';
-
+import { ref, type Ref, watch } from 'vue';
 
 const billInputStatus: Ref<'focused' | 'error' | null> = ref(null)
 const peopleInputStatus: Ref<'focused' | 'error' | null> = ref(null)
+const tip: Ref<number> = ref(0)
+const tipInput = ref('')
+
+watch(tip, (newValue) => {
+   if (newValue == Number(tipInput.value)) return
+   tipInput.value = ''
+})
+
+watch(tipInput, (newValue) => {
+   if (newValue == '') return
+
+   tip.value = Number(newValue)
+})
 
 </script>
 
@@ -24,13 +36,13 @@ const peopleInputStatus: Ref<'focused' | 'error' | null> = ref(null)
 
       <label>Gorjeta %</label>
       <div class="select">
-         <button>5%</button>
-         <button>10%</button>
-         <button>15%</button>
-         <button>25%</button>
-         <button>50%</button>
+         <button :class="{ 'selected': tip === 5 }" @click="tip = 5">5%</button>
+         <button :class="{ 'selected': tip === 10 }" @click="tip = 10">10%</button>
+         <button :class="{ 'selected': tip === 15 }" @click="tip = 15">15%</button>
+         <button :class="{ 'selected': tip === 25 }" @click="tip = 25">25%</button>
+         <button :class="{ 'selected': tip === 50 }" @click="tip = 50">50%</button>
          <div class="type">
-            <input type="number" placeholder="Custom" />
+            <input type="number" placeholder="Custom" v-model.trim="tipInput" />
          </div>
       </div>
 
@@ -75,6 +87,11 @@ div.select {
       height: 100%;
       margin: 0;
       padding: 0;
+   }
+
+   .selected {
+      background: hsl(172, 67%, 45%);
+      color: hsl(183, 100%, 15%);
    }
 
    input {
