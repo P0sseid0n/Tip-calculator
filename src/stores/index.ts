@@ -14,7 +14,7 @@ export const useStore = defineStore({
 			} else return 0
 		},
 		total(state) {
-			if (state.bill && state.people && state.tip) {
+			if (state.bill && state.people && state.tip && state.tip != '0') {
 				return (Number(state.bill) * (1 + Number(state.tip) / 100)) / Number(state.people)
 			} else return 0
 		},
